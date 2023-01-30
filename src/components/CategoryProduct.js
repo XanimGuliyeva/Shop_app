@@ -4,8 +4,7 @@ import {CartContext} from '../context/CartContext'
 
 const CategoryProduct = ({id,title,image,price})=> {
 
-  const cartContext = useContext(CartContext);
-  const addProduct = cartContext;
+  const {addProduct} =  useContext(CartContext)
   const navigate = useNavigate();
 
   return (
