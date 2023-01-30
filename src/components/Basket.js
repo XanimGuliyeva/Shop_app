@@ -38,6 +38,12 @@ const Basket = () => {
       return <div>The basket is empty</div>
     }
   }
+
+  const renderTotal = ()=>{
+    const cartItems = getItems();
+    const total = cartItems.reduce((total, item)=>(total+item.price*item.quantity), 0);
+    return total;
+  }
   return (
     <div style={{padding:'20px'}}>
       <h1>Shopping Basket</h1>  
@@ -53,7 +59,7 @@ const Basket = () => {
       </table>
       <br/>
       <button onClick={()=>clearBasket()}>CLEAR</button>
-      <span>Total:</span>
+      <span>Total: $ {renderTotal()}</span>
     </div>
   )
 }

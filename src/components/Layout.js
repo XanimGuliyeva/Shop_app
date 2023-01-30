@@ -20,8 +20,10 @@ const Layout = ({categories}) => {
 
   return (
     <React.Fragment>
-      <header>
-        My Store
+      <header style={{display:'flex', justifyContent:'space-between', fontSize:'20px'}}>
+        <Link  to='/'><span>Home</span></Link>
+        <span>Our Store</span>
+        <Link to='/basket'><span>Cart: </span></Link>
       </header>
       <section>
           <nav>
