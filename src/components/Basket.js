@@ -1,16 +1,22 @@
-import React,{useContext} from 'react'
-import {Link,useNavigate} from 'react-router-dom'
+import React,{useContext,useEffect,useState} from 'react';
+import {Link,useNavigate} from 'react-router-dom';
 import {CartContext} from '../context/CartContext'
 
 
 const Basket = () => {
-  
-  const {getItems,clearBasket,increaseQuantity,decreaseQuantity,removeProduct} =  useContext(CartContext)
+
+  const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
+  const {getItems,clearBasket,increaseQuantity,decreaseQuantity,removeProduct} =  useContext(CartContext);
+
+
+  useEffect(()=>{
+    //const cartItems = getItems();
+    //setCartItems(cartItems);
+    setCartItems(getItems());
+  },[getItems])
 
   const renderCart = ()=>{
-
-    const cartItems = getItems();
 
     if (cartItems.length>0){
       return cartItems.map((p)=>(
@@ -22,10 +28,10 @@ const Basket = () => {
                 </Link>
             </td>
             <td style={{width:'200px',textAlign:'center'}}>
-                <button onClick={()=>increaseQuantity({id:p.id})}>+</button>
+                <button onClick={()=>setCartItems(increaseQuantity({id:p.id}))}>+</button>
                   {p.quantity}
-                <button onClick={()=>decreaseQuantity({id:p.id})}>-</button>
-                <button onClick={()=>removeProduct({id:p.id})}>Trash</button>
+                <button onClick={()=>setCartItems(decreaseQuantity({id:p.id}))}>-</button>
+                <button onClick={()=>setCartItems(removeProduct({id:p.id}))}>Trash</button>
             </td>
             <td style={{width:'200px',textAlign:'center'}}>
                 {p.price}
@@ -58,7 +64,7 @@ const Basket = () => {
         {renderCart()}
       </table>
       <br/>
-      <button onClick={()=>clearBasket()}>CLEAR</button>
+      <button onClick={()=>setCartItems(clearBasket())}>CLEAR</button>
       <span>Total: $ {renderTotal()}</span>
     </div>
   )
