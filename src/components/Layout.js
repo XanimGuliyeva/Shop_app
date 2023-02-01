@@ -1,5 +1,6 @@
 import React from 'react'
 import { Outlet,Link } from 'react-router-dom';
+import Search from './Search';
 
 const Layout = ({categories}) => {
 
@@ -22,6 +23,7 @@ const Layout = ({categories}) => {
     <React.Fragment>
       <header style={{display:'flex', justifyContent:'space-between', fontSize:'20px'}}>
         <Link  to='/'><span>Home</span></Link>
+        <Search/>
         <span>Our Store</span>
         <Link to='/basket'><span>Cart: </span></Link>
       </header>
