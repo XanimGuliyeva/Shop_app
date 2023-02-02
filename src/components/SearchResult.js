@@ -17,16 +17,22 @@ const SearchResult = () => {
       },[query])
 
       const renderProducts = () => {
-        return products.data.map(d => 
-          <CategoryProduct key={d.id} {...d}>{d.title}</CategoryProduct>
-        )
+        if(products.data.length>0){
+          return products.data.map(d => 
+            <CategoryProduct key={d.id} {...d}>{d.title}</CategoryProduct>
+          )
+        }
+        else{
+          return <div>No results found</div>
+        }
+
       };
 
   return (
     <div >
         <h1>Products</h1>
           {products.errorMessage && <div>Error: {products.errorMessage}</div>}
-          {products.data && renderProducts()}
+          {renderProducts()}
     </div>
   )
 }
